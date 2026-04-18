@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tienda_pc/models/usuarios.dart';
 
-class UsuariosTile extends StatelessWidget {
-  
+class UsuariosCard extends StatelessWidget {
   final Usuario usuario;
   final VoidCallback eliminar;
   final VoidCallback editar;
 
-  const UsuariosTile({
+  const UsuariosCard({
     super.key, 
     required this.usuario, 
     required this.eliminar, 

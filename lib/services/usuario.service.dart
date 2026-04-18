@@ -9,7 +9,7 @@ class UsuarioService {
     final response = await http.get(Uri.parse('$api/usuarios')); 
 
     if (response.statusCode == 200){
-      final List usuarios = jsonDecode(response.body);
+      final List<dynamic> usuarios = jsonDecode(response.body);
 
       return usuarios.map((json) => Usuario.fromJson(json)).toList();
       

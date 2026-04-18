@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tienda_pc/models/usuarios.dart';
 import 'package:tienda_pc/screens/admin/usuarios_formulario_screen.dart';
 import 'package:tienda_pc/services/usuario.service.dart';
-import 'package:tienda_pc/widgets/usuarios_tile.dart';
+import 'package:tienda_pc/widgets/usuarios_card.dart';
 
 class UsuariosListScreen extends StatefulWidget {
   const UsuariosListScreen({super.key});
@@ -49,7 +49,7 @@ class _UsuariosListScreenState extends State<UsuariosListScreen> {
       : ListView.builder(itemCount: usuarios.length, itemBuilder: (context, index) {
         final usuario = usuarios[index];
 
-        return UsuariosTile(
+        return UsuariosCard(
           usuario: usuario,
           eliminar: () async {
             final confirmar = await showDialog<bool>(context: context, builder: (context) => AlertDialog(

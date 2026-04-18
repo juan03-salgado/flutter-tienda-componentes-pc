@@ -15,11 +15,11 @@ class Usuario {
 
   factory Usuario.fromJson(Map<String, dynamic> json) {
     return Usuario(
-      id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()),
+      id: int.tryParse(json['id'].toString()),
       nombre: json['nombre_user'],
       email: json['email'],
       contrasena: json['contrasena'],
-      rol: json['id_rol'] is int ? json['id_rol'] : int.parse(json['id_rol'].toString()),
+      rol: int.tryParse(json['id_rol'].toString()) ?? 0,
     );
   }
 
