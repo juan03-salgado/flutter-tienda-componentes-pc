@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tienda_pc/screens/admin/home_screen.dart';
-import 'package:tienda_pc/screens/auth/login_screen.dart';
-import 'package:tienda_pc/screens/auth/register_screen.dart';
-import 'package:tienda_pc/screens/productos/productos_screen.dart';
+import 'package:tienda_pc/auth/screens/login_screen.dart';
+import 'package:tienda_pc/auth/screens/register_screen.dart';
+import 'package:tienda_pc/features/compras/screens/compras_list_screen.dart';
+import 'package:tienda_pc/features/home/admin/screens/home_admin_screen.dart';
+import 'package:tienda_pc/features/home/usuarios/screens/clientes_main_screen.dart';
+import 'package:tienda_pc/features/home/vendedor/screens/vendedor_main_screen.dart';
+import 'package:tienda_pc/features/productos/screens/productos_screen.dart';
+import 'package:tienda_pc/features/usuarios/screens/usuarios_list_screen.dart';
+import 'package:tienda_pc/models/usuarios.dart';
 
 void main(){
   runApp(const MyApp());
@@ -17,10 +22,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
       routes: {
-        '/login': (context) => LoginScreen(),
-        '/home-admin': (context) => HomeScreen(),
         '/registro': (context) => RegisterScreen(),
-        '/productos': (context) => ProductosScreen(rol: 3),
+        '/login': (context) => LoginScreen(),
+        '/home-admin': (context) => HomeAdminScreen(),
+        '/clientes-main': (context) => ClientesMainScreen(),
+        '/vendedor-main': (context) => VendedorMainScreen(),
+        '/usuarios': (context) => UsuariosListScreen(),
+        '/productos': (context) {
+          final usuario = ModalRoute.of(context)!.settings.arguments as Usuario;
+          return ProductosScreen(rol: usuario.rol, vista: true, usuario: usuario);
+        },
+        '/compras': (context) => ComprasListScreen(),
       },
     );
   }

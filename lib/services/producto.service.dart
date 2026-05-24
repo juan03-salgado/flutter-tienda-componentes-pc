@@ -30,6 +30,17 @@ class ProductoService {
     }
   }
 
+  Future<List <Producto>> getProductoVendedor(int idVendedor) async {
+    final response = await http.get(Uri.parse('$api/productos/vendedor/$idVendedor'));
+
+    if(response.statusCode == 200){
+      final List <dynamic> productos = jsonDecode(response.body);
+      return productos.map((json) => Producto.fromJson(json)).toList();
+    } else {
+      throw Exception("Error al cargar el producto con el id $idVendedor");
+    }
+  }
+
   Future<void> crearProducto(Producto producto, File? imagen) async {
     final request = http.MultipartRequest('POST', Uri.parse('$api/productos'));
 
@@ -38,6 +49,8 @@ class ProductoService {
     request.fields['id_categoria'] = producto.idCategoria.toString();
     request.fields['precio_unidad'] = producto.precioUnidad.toString();
     request.fields['unidades'] = producto.unidades.toString();
+    request.fields['id_vendedor'] = producto.id_vendedor.toString();
+    request.fields['otra_categoria'] = producto.otraCategoria ?? '';
 
     if(imagen != null){
       request.files.add(await http.MultipartFile.fromPath('imagen', imagen.path));
@@ -62,6 +75,7 @@ class ProductoService {
     request.fields['id_categoria'] = producto.idCategoria.toString();
     request.fields['precio_unidad'] = producto.precioUnidad.toString();
     request.fields['unidades'] = producto.unidades.toString();
+    request.fields['otra_categoria'] = producto.otraCategoria ?? '';
 
     if(imagen != null){
       request.files.add(await http.MultipartFile.fromPath('imagen', imagen.path));
@@ -76,7 +90,7 @@ class ProductoService {
 
   Future<void> eliminarProducto(int id) async {
     final response = await http.delete(Uri.parse('$api/productos/$id'));
-
+  
     if(response.statusCode != 200){
       throw Exception("Error al eliminar el producto");
     }

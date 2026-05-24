@@ -4,13 +4,15 @@ class Detallecompra {
   final String categoria;
   final int cantidad;
   final double precioTotal;
+  final String? imagenUrl;
 
   Detallecompra({
     required this.idProducto,
     required this.producto,
     required this.categoria,
     required this.cantidad,
-    required this.precioTotal
+    required this.precioTotal,
+    this.imagenUrl
   });
   
   factory Detallecompra.fromJson(Map<String, dynamic> json){
@@ -20,6 +22,7 @@ class Detallecompra {
       categoria: json['categoria'] ?? '',
       cantidad: int.tryParse(json['cantidad']?.toString() ?? '') ?? 0,
       precioTotal: double.tryParse(json['precio_total'].toString()) ?? 0,
+      imagenUrl: json['imagenUrl'],
     );
   }
 }

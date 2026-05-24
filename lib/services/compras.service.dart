@@ -17,14 +17,36 @@ class ComprasService {
     }
   }
 
-  Future<Compras> getCompraId(int id) async {
-    final response = await http.get(Uri.parse('$api/compras/$id'));
+  Future<List <Compras>> getCompraId(int idCarrito) async {
+    final response = await http.get(Uri.parse('$api/compras/$idCarrito'));
 
     if(response.statusCode == 200){
-      final compras = jsonDecode(response.body);
-      return Compras.fromJson(compras);
+      final List<dynamic> compras = jsonDecode(response.body);
+      return compras.map((json) => Compras.fromJson(json)).toList();
     } else {
-      throw Exception("Error al obtener los productos del carrito con el id $id");
+      throw Exception("Error al obtener compras del usuario");
+    }
+  }
+
+  Future<List <Compras>> getCompraUsuario(int idUsuario) async {
+    final response = await http.get(Uri.parse('$api/compras/cliente/$idUsuario'));
+
+    if(response.statusCode == 200){
+      final List<dynamic> compras = jsonDecode(response.body);
+      return compras.map((json) => Compras.fromJson(json)).toList();
+    } else {
+      throw Exception("Error al obtener compras del usuario");
+    }
+  }
+
+  Future<List <Compras>> getVentasVendedor(int idVendedor) async {
+    final response = await http.get(Uri.parse('$api/compras/vendedor/$idVendedor'));
+
+    if(response.statusCode == 200){
+      final List<dynamic> compras = jsonDecode(response.body);
+      return compras.map((json) => Compras.fromJson(json)).toList();
+    } else {
+      throw Exception("Error al obtener ventas del vendedor");
     }
   }
 

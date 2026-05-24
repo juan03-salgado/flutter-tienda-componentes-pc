@@ -5,12 +5,11 @@ import 'package:http/http.dart' as http;
 class CarritoProductosService {
   final String api = 'http://10.0.2.2:3000';
 
-  Future<List <CarritoProducto>> getCarritoProductos() async {
-    final response = await http.get(Uri.parse('$api/productosCarrito'));
+  Future<List <CarritoProducto>> getCarritoProductosUsuario(int idCarrito) async {
+    final response = await http.get(Uri.parse('$api/productosCarrito/carrito/$idCarrito'));
 
     if(response.statusCode == 200){
       final List<dynamic> carritoProductos = jsonDecode(response.body);
-      
       return carritoProductos.map((json) => CarritoProducto.fromJson(json)).toList();
     
     } else {

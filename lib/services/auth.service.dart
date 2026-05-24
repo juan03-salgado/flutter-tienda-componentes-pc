@@ -5,19 +5,28 @@ import 'package:http/http.dart' as http;
 
 class AuthService {
   final String api = 'http://10.0.2.2:3000';
+
+  Usuario? usuarioActual;
   
   Future<Usuario> login(String nombre, String contrasena) async {
     final response = await http.post(Uri.parse('$api/usuarios/login'),
     headers: {'Content-Type': 'application/json'},
-    body: jsonEncode({ 'nombre_user': nombre, 'contrasena': contrasena})
+    body: jsonEncode({ 'nombre_user': nombre.trim(), 'contrasena': contrasena.trim()})
     );
 
     if(response.statusCode == 200){
       final resultado = jsonDecode(response.body);
-      return Usuario.fromJson(resultado['usuario']);
+      usuarioActual = Usuario.fromJson(resultado['usuario']);
+      return usuarioActual!;
+    } else if(response.statusCode == 404) {
+      throw Exception("El usuario no existe");
     } else {
       throw Exception("Login fallido");
     }
+  }
+  
+  void logout() {
+    usuarioActual = null;
   }
 
   Future<Usuario> register(String nombre, String email, String contrasena) async {
@@ -33,4 +42,4 @@ class AuthService {
       throw Exception("Registro fallido");
     }
   } 
-} 
+}

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:tienda_pc/models/detalleCompra.dart';
 
 class Compras {
@@ -20,6 +21,8 @@ class Compras {
     required this.cliente,
     required this.productos
   });
+
+  String get fechaFormateada => DateFormat('dd/MM/yyyy').format(DateTime.parse(fechaCompra));
 
   factory Compras.fromJson(Map<String, dynamic> json){
     return Compras(

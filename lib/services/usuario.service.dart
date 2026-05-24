@@ -63,6 +63,17 @@ class UsuarioService {
     }
   }
 
+  Future<void> convertirVendedor(int id, String telefono, String direccion, String nombreTienda) async {
+    final response = await http.put(Uri.parse('$api/usuarios/$id/convertirVendedor'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({'telefono': telefono, 'direccion': direccion, 'nombre_tienda': nombreTienda})
+    );
+
+    if(response.statusCode != 200){
+      throw Exception("Error al convertir en vendedor");
+    }
+  }
+
   Future<void> eliminarUsuario(int id) async {
     final response = await http.delete(Uri.parse('$api/usuarios/$id'));
 

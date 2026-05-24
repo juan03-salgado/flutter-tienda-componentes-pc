@@ -6,7 +6,7 @@ class CarritoProducto {
   final int idProducto;
   final int cantidad;
   final double? precioTotal;
-  final Producto producto;
+  final Producto? producto;
 
   CarritoProducto({
     this.id,
@@ -14,17 +14,17 @@ class CarritoProducto {
     this.precioTotal,
     required this.idCarrito,
     required this.idProducto,
-    required this.producto
+    this.producto
   });
 
   factory CarritoProducto.fromJson(Map<String, dynamic> json){
     return CarritoProducto(
       id: int.tryParse(json['id'].toString()),
       idCarrito: int.tryParse(json['id_carrito'].toString()) ?? 0,
-      idProducto: int.tryParse(json['producto']?['id']?.toString() ?? '') ?? 0,
+      idProducto: json['producto'] != null ? int.tryParse(json['producto']['id'].toString()) ?? 0: 0,      
       cantidad: int.tryParse(json['cantidad'].toString()) ?? 0,
       precioTotal: double.tryParse(json['precio_total'].toString()) ?? 0,
-      producto: Producto.fromJson(json['producto'] ?? {}),
+      producto: json['producto'] != null ? Producto.fromJson(json['producto']) : null, 
     );
   }
 
