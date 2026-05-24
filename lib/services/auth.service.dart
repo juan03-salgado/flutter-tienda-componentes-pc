@@ -4,7 +4,7 @@ import 'package:tienda_pc/models/usuarios.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  final String api = 'http://10.0.2.2:3000';
+  final String api = 'https://backend-tienda-pc.onrender.com';
 
   Usuario? usuarioActual;
   

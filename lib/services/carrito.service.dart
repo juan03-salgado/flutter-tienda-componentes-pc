@@ -4,7 +4,7 @@ import 'package:tienda_pc/models/carrito.dart';
 import 'package:http/http.dart' as http;
 
 class CarritoService {
-  final String api = 'http://10.0.2.2:3000';
+  final String api = 'https://backend-tienda-pc.onrender.com';
 
   Future<List <Carrito>> getCarrito() async {
     final response = await http.get(Uri.parse('$api/carrito'));

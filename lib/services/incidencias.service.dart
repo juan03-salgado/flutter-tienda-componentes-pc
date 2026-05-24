@@ -3,7 +3,7 @@ import 'package:tienda_pc/models/incidencias.dart';
 import 'package:http/http.dart' as http;
 
 class IncidenciasService {
-  final String api = 'http://10.0.2.2:3000';
+  final String api = 'https://backend-tienda-pc.onrender.com';
 
   Future<List <Incidencia>> getIncidencias() async {
     final response = await http.get(Uri.parse('$api/incidencias'));

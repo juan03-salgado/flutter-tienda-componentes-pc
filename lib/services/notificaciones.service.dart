@@ -4,7 +4,7 @@ import 'package:tienda_pc/models/notificacion.dart';
 import 'package:http/http.dart' as http;
 
 class NotificacionesService {
-  final String api = 'http://10.0.2.2:3000';
+  final String api = 'https://backend-tienda-pc.onrender.com';
 
   Future<List <Notificacion>> getNotificaciones(int idUsuario) async {
     final response = await http.get(Uri.parse('$api/notificaciones/usuario/${idUsuario}'));

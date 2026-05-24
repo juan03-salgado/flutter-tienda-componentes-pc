@@ -3,7 +3,7 @@ import 'package:tienda_pc/models/serviciosTecnicos.dart';
 import 'package:http/http.dart' as http;
 
 class ServiciostecnicosService {
-  final String api = 'http://10.0.2.2:3000';
+  final String api = 'https://backend-tienda-pc.onrender.com';
 
   Future<List<Serviciostecnicos>> getServiciosTecnicos() async {
     final response = await http.get(Uri.parse('$api/servicios'));

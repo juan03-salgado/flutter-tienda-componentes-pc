@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:tienda_pc/models/usuarios.dart';
 
 class UsuarioService {
-  final String api = 'http://10.0.2.2:3000';
+  // api local: 'http://10.0.2.2:3000'
+  final String api = 'https://backend-tienda-pc.onrender.com';
 
   Future <List <Usuario>> getUsuarios() async {
     final response = await http.get(Uri.parse('$api/usuarios')); 

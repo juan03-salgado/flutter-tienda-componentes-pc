@@ -4,7 +4,7 @@ import 'package:tienda_pc/models/productos.dart';
 import 'package:http/http.dart' as http;
 
 class ProductoService {
-  final String api = 'http://10.0.2.2:3000';
+  final String api = 'https://backend-tienda-pc.onrender.com';
 
   Future<List <Producto>> getProductos() async {
     final response = await http.get(Uri.parse('$api/productos'));
