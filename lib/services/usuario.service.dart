@@ -4,7 +4,8 @@ import 'package:tienda_pc/models/usuarios.dart';
 
 class UsuarioService {
   // api local: 'http://10.0.2.2:3000'
-  final String api = 'https://backend-tienda-pc.onrender.com';
+  // para conectar al celular: 'http://192.168.0.26:3000'
+  final String api = 'http://10.0.2.2:3000';
 
   Future <List <Usuario>> getUsuarios() async {
     final response = await http.get(Uri.parse('$api/usuarios')); 

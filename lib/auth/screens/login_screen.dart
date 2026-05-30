@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => loading = true);
 
   try {
-      final usuario = await authService.login(nombreController.text, contrasenaController.text);
+      final usuario = await authService.login(nombreController.text.trim(), contrasenaController.text.trim());
 
       if(usuario.rol == 1){
         Navigator.pushReplacementNamed(context, "/home-admin", arguments: usuario);

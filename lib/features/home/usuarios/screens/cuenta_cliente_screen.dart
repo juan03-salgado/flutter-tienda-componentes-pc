@@ -20,6 +20,7 @@ class _CuentaClienteScreenState extends State<CuentaClienteScreen> {
 
   final ClientesService clientesService = ClientesService();
   final UsuarioService usuarioService = UsuarioService();
+  late Usuario usuarioActual;
 
   Cliente? cliente;
   bool loading = true;
@@ -34,6 +35,7 @@ class _CuentaClienteScreenState extends State<CuentaClienteScreen> {
   @override
   void initState() {
     super.initState();
+    usuarioActual = widget.usuario;
     cargarDatos();
   }
 
@@ -84,6 +86,12 @@ class _CuentaClienteScreenState extends State<CuentaClienteScreen> {
 
       await usuarioService.actualizarUsuario(usuarioActualizado);
 
+      final actualizado = await usuarioService.getUsuarioId(usuarioActualizado.id!);
+
+      setState(() {
+        usuarioActual = actualizado;
+      });
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Datos actualizados")));
       Navigator.pop(context, usuarioActualizado);
 
@@ -103,6 +111,12 @@ class _CuentaClienteScreenState extends State<CuentaClienteScreen> {
           idCarrito: widget.usuario.idCarrito
       );
       await usuarioService.actualizarUsuario(usuarioActualizado);
+
+      final actualizado = await usuarioService.getUsuarioId(usuarioActualizado.id!);
+
+      setState(() {
+        usuarioActual = actualizado;
+      });
 
       if(cliente != null){
         await clientesService.actualizarCliente(
